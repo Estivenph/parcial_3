@@ -13,7 +13,7 @@ import java.util.Locale;
 public class MainActivity2 extends AppCompatActivity {
 
 
-    private TextView total_1, total_2, total_3, total, fecha, prod_1, prod_2, prod_3, unitario_1, unitario_2, unitario_3;
+    private TextView total_1, total_2, total_3, total, fecha, prod_1, prod_2, prod_3, unitario_1, unitario_2, unitario_3, total_m_iva, iva;
     private int precio_p_1, precio_p_2, precio_p_3;
 
 
@@ -33,6 +33,8 @@ public class MainActivity2 extends AppCompatActivity {
         total_2 = findViewById(R.id.total_2);
         total_3 = findViewById(R.id.total_3);
         total = findViewById(R.id.total);
+        total_m_iva = findViewById(R.id.total_m_iva);
+        iva = findViewById(R.id.iva);
         precio_p_1 = 40000;
         precio_p_2 = 65000;
         precio_p_3 = 85000;
@@ -59,8 +61,12 @@ public class MainActivity2 extends AppCompatActivity {
             total_2.setText(String.valueOf(calcula(precio_p_2, prod.getCant_2())));
             total_3.setText(String.valueOf(calcula(precio_p_3, prod.getCant_3())));
 
-
-            total.setText(String.valueOf((calcula(precio_p_1, prod.getCant_1())+(calcula(precio_p_2, prod.getCant_2()))+(calcula(precio_p_3, prod.getCant_3())))));
+            int v_total = (calcula(precio_p_1, prod.getCant_1())+(calcula(precio_p_2, prod.getCant_2()))+(calcula(precio_p_3, prod.getCant_3())));
+            double v_iva = v_total * 0.19;
+            double v_total_m_iva = Double.parseDouble(String.valueOf(v_total)) - v_iva;
+            total.setText(String.valueOf((v_total)));
+            total_m_iva.setText(String.valueOf((v_total_m_iva)));
+            iva.setText(String.valueOf((v_iva)));
         }
     }
 
